@@ -4,12 +4,15 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  // CORS headers - restrict to allowed origin
-  const allowedOrigin = 'https://alhasnaa-signature.odoo.com';
+  // CORS headers - restrict to allowed origins
+  const allowedOrigins = [
+    'https://alhasnaa-signature.odoo.com',
+    'https://alhasnaasignature.com'
+  ];
   const origin = req.headers.origin;
 
-  if (origin === allowedOrigin) {
-    res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
   }
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
