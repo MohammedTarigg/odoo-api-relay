@@ -1,0 +1,12 @@
+{
+  "name": "odoo-api-relay",
+  "version": "1.0.0",
+  "description": "Secure API relay for Odoo product categories",
+  "type": "module",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel deploy --prod"
+  },
+  "keywords": ["odoo", "api", "relay", "vercel", "serverless"],
+  "license": "MIT"
+}

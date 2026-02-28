@@ -1,0 +1,331 @@
+<div id="categories-section">
+  <div id="categories-loader">
+    <div class="shimmer-card">
+      <div class="shimmer-image"></div>
+      <div class="shimmer-text"></div>
+    </div>
+    <div class="shimmer-card">
+      <div class="shimmer-image"></div>
+      <div class="shimmer-text"></div>
+    </div>
+    <div class="shimmer-card">
+      <div class="shimmer-image"></div>
+      <div class="shimmer-text"></div>
+    </div>
+  </div>
+  <div id="categories-grid"></div>
+</div>
+
+<style>
+  #categories-section {
+    padding: 60px 20px;
+    background: #fff;
+    min-height: 400px;
+  }
+
+  #categories-loader {
+    display: grid;
+    grid-template-columns: repeat(3, 328px);
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    justify-content: center;
+  }
+
+  .shimmer-card {
+    width: 328px;
+  }
+
+  .shimmer-image {
+    width: 328px;
+    height: 656px;
+    background: #f0f0f0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shimmer-image::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      135deg,
+      transparent 25%,
+      rgba(255, 255, 255, 0.6) 50%,
+      transparent 75%
+    );
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      transform: translate(-50%, -50%);
+    }
+    100% {
+      transform: translate(50%, 50%);
+    }
+  }
+
+  .shimmer-text {
+    width: 60%;
+    height: 24px;
+    background: #f0f0f0;
+    margin: 20px auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shimmer-text::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      135deg,
+      transparent 25%,
+      rgba(255, 255, 255, 0.6) 50%,
+      transparent 75%
+    );
+    animation: shimmer 1.5s infinite;
+  }
+
+  #categories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 328px);
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    justify-content: center;
+  }
+
+  .category-card {
+    display: block;
+    width: 328px;
+    overflow: hidden;
+    border-radius: 0;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+
+  .category-card:hover {
+    transform: translateY(-8px);
+  }
+
+  .category-image-wrapper {
+    position: relative;
+    width: 328px;
+    height: 656px;
+    overflow: hidden;
+  }
+
+  .category-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .category-card:hover .category-image {
+    transform: scale(1.05);
+  }
+
+  .category-image-wrapper::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      135deg,
+      transparent 25%,
+      rgba(255, 255, 255, 0.5) 50%,
+      transparent 75%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .category-card:hover .category-image-wrapper::after {
+    opacity: 1;
+    animation: shine 0.8s ease forwards;
+  }
+
+  @keyframes shine {
+    0% {
+      transform: translate(-50%, -50%);
+    }
+    100% {
+      transform: translate(50%, 50%);
+    }
+  }
+
+  .category-info {
+    padding: 20px 0;
+    text-align: center;
+  }
+
+  .category-name {
+    font-size: 18px;
+    font-weight: 500;
+    color: #222;
+    margin: 0;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .category-cta {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #888;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+  }
+
+  .category-card:hover .category-cta {
+    color: #c9a76c;
+  }
+
+  .no-image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f5f5;
+    font-size: 64px;
+    color: #ddd;
+  }
+
+  @media (max-width: 1100px) {
+    #categories-loader {
+      grid-template-columns: repeat(2, 280px);
+      gap: 20px;
+    }
+    .shimmer-card {
+      width: 280px;
+    }
+    .shimmer-image {
+      width: 280px;
+      height: 560px;
+    }
+    #categories-grid {
+      grid-template-columns: repeat(2, 280px);
+      gap: 20px;
+    }
+    .category-card {
+      width: 280px;
+    }
+    .category-image-wrapper {
+      width: 280px;
+      height: 560px;
+    }
+  }
+
+  @media (max-width: 620px) {
+    #categories-loader {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      padding: 10px;
+      justify-items: center;
+    }
+    .shimmer-card {
+      width: 280px;
+    }
+    .shimmer-image {
+      width: 280px;
+      height: 560px;
+    }
+    #categories-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      padding: 10px;
+      justify-items: center;
+    }
+    .category-card {
+      width: 280px;
+    }
+    .category-image-wrapper {
+      width: 280px;
+      height: 560px;
+    }
+    .category-name {
+      font-size: 14px;
+    }
+  }
+</style>
+
+<script>
+(function() {
+  var loader = document.getElementById('categories-loader');
+  var grid = document.getElementById('categories-grid');
+
+  fetch('https://odoo-api-relay.vercel.app/api/categories')
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      if (!data.success || !data.categories) {
+        loader.innerHTML = '<p style="text-align:center;color:#888;">No collections available</p>';
+        return;
+      }
+
+      loader.style.display = 'none';
+      var categories = data.categories;
+
+      for (var i = 0; i < categories.length; i++) {
+        var cat = categories[i];
+        var card = document.createElement('a');
+        card.className = 'category-card';
+        card.href = '/shop/category/' + cat.id;
+
+        var wrapper = document.createElement('div');
+        wrapper.className = 'category-image-wrapper';
+
+        if (cat.image_url) {
+          var img = document.createElement('img');
+          img.className = 'category-image';
+          img.src = cat.image_url;
+          img.alt = cat.name;
+          img.loading = 'lazy';
+          wrapper.appendChild(img);
+        } else {
+          var placeholder = document.createElement('div');
+          placeholder.className = 'no-image-placeholder';
+          placeholder.textContent = cat.name.charAt(0);
+          wrapper.appendChild(placeholder);
+        }
+
+        var info = document.createElement('div');
+        info.className = 'category-info';
+
+        var name = document.createElement('h3');
+        name.className = 'category-name';
+        name.textContent = cat.name;
+
+        var cta = document.createElement('span');
+        cta.className = 'category-cta';
+        cta.textContent = 'View Collection';
+
+        info.appendChild(name);
+        info.appendChild(cta);
+        card.appendChild(wrapper);
+        card.appendChild(info);
+        grid.appendChild(card);
+      }
+    })
+    .catch(function(err) {
+      console.error('Fetch error:', err);
+      loader.innerHTML = '<p style="text-align:center;color:#c00;">Failed to load collections</p>';
+    });
+})();
+</script>
