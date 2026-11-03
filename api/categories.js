@@ -1,3 +1,5 @@
+import { createHash } from 'crypto';
+
 export default async function handler(req, res) {
   // Only allow GET requests
   if (req.method !== 'GET') {
@@ -99,13 +101,18 @@ export default async function handler(req, res) {
       image_url: `${odooBase}/web/image/product.public.category/${cat.id}/image_1920`
     }));
 
-    // Cache at Vercel CDN for 5 min, serve stale while revalidating for up to 1 hour
-    res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=3600');
+    // Cache at Vercel CDN for 5 min, serve stale while revalidating for up to 1 hour.
+    // Browsers must not cache: a 304 revalidation drops the CORS header, so a stored
+    // copy would keep whatever origin it was first fetched for.
+    res.setHeader('Vercel-CDN-Cache-Control', 's-maxage=300, stale-while-revalidate=3600');
+    res.setHeader('Cache-Control', 'no-store');
 
-    return res.status(200).json({
-      success: true,
-      categories
-    });
+    // Own ETag so browsers still holding a pre-fix copy get a full 200, not a 304
+    const body = JSON.stringify({ success: true, categories });
+    res.setHeader('ETag', `"v2-${createHash('sha1').update(body).digest('hex')}"`);
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+
+    return res.status(200).send(body);
 
   } catch (error) {
     console.error('Error fetching categories:', error);
